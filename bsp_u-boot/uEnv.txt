@@ -1,0 +1,12 @@
+bootfile=kernel.bin
+address_uimage=0x80300000
+address_exec=0x80300000
+
+console=ttyO2,115200n8
+optargs=console=tty0
+
+mmc_load_uimage=fatload mmc 0:1 ${address_uimage} ${bootfile}
+
+mmcargs=setenv bootargs console=${console} ${optargs} mpurate=${mpurate}
+
+loaduimage=run mmc_load_uimage; echo Booting from mmc ...; go 0x80300000
